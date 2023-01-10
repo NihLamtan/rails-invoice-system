@@ -1,0 +1,2 @@
+module SuperAdmin::UserSalesTargetsHelper
+end

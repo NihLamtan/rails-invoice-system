@@ -1,0 +1,112 @@
+.badge.badge-success.refunded {
+    background: red;
+}
+
+.refund-para {
+    font-size: 12px;
+}
+
+.client-show {
+    display: flex;
+}
+
+.client-show .btn.btn-danger {
+    margin-left: 18px;
+}
+
+.nav-tabs .nav-item {
+    width: 23%;
+}
+
+.nav-tabs .nav-link {
+    padding: 1.5rem;
+}
+
+.nav-tabs>li {
+    background-color: white;
+    margin-right: 20px;
+}
+.invoice-nav-tabs .nav-item{
+    width: 33%;
+    text-align: center;
+}
+.logo-dark .header-logo{
+    width:58%;
+}
+
+.logo-fold{
+    width: 73px;
+    margin-top: 5px;
+}
+
+/* .remove_field {
+    display:flex;
+    align-items: center;
+    margin-bottom: 30px;
+} */
+.form-control{
+    border: 1px solid rgba(0,0,0,.2);
+}
+.deduction{
+    font-size: 20px;
+}
+
+.total{
+    font-size: 34px;
+}
+.total_amount {
+    color: #238ccc!important;
+}
+.hd-sm {
+    font-size: 20px;
+    font-weight: 400;
+}
+.blue {
+    color: #238ccc;
+}
+.gray {
+    color: rgba(0,0,0,.6);
+}
+.hd-xsm {
+    font-size: 16px;
+}
+.error {
+    color: #c00;
+    font-weight: 400;
+}
+.hd-xxsm {
+    font-size: 14px;
+}
+#refund-modal .refunded-amount-field{
+    width: 50%;
+}
+
+.modal-option.d-flex.align-items-center{
+    padding-bottom: 25px;
+}
+
+.status span{
+    padding: 3px 16px;
+    border-radius: 100px;
+}
+.payment-status-paid span{
+    background: #58ab58;
+    color: white;
+  
+}
+
+.payment-status-unpaid span{
+    background: orange;
+    color: white;
+}
+
+.payment-status-refunded span{
+    background: red;
+    color: white;
+}
+
+.payment-status-partial_refund span{
+    background:rgb(241, 131, 131);
+    color: white;
+
+}

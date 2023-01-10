@@ -1,0 +1,49 @@
+    <section class="login-sec">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-5">
+                <div class="logo text-center">
+                <%= image_tag "inviz-logo.png" %>
+                   
+                </div>
+                <h1 class="form-heading">
+                    Sign in to your account
+                </h1>
+  <%= render "devise/shared/error_messages", resource: resource %>
+
+
+
+       
+<%= form_for(resource, as: resource_name, url: session_path(resource_name), data: { turbo: false }) do |f| %>
+                  
+                    <div class="mb-3">
+                       <%= f.label :email, class: "form-label" %>
+                           <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control" %>
+                    </div>
+                    <div class="mb-3">
+                       <%= f.label :password, class: "form-label" %>
+                           <%= f.password_field :password, autofocus: true, autocomplete: "current-password", class: "form-control" %>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <div class="mb-3 form-check ">
+                      <% if devise_mapping.rememberable? %>
+                          <div class="field">
+                            <%= f.check_box :remember_me, class: "form-check-input" %>
+                            <%= f.label :remember_me, class: "form-check-label"%>
+                          </div>
+                        <% end %>
+                         
+                        </div>
+                       <%= render "devise/shared/links" %>
+
+                    </div>
+                   <%= f.submit "Sign in", class: "btn btn-primary login-form-btn" %>
+
+               <% end %>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+

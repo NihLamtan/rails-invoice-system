@@ -1,0 +1,28 @@
+       
+              <% @companies.each do |company| %>
+
+                            <tr id="<%= dom_id company %>">
+                                <td><%= company.name %></td>
+                                <td><%= company.email %></td>
+                                    <% if company.logo.attached? %>
+                                            <td class="company-logo"><%= image_tag company.logo %></td>
+                                            <% else %>
+                                                    <td></td>
+                                            <% end %>
+                                                          
+                                <td>
+                                <ul class="d-flex action-btn">
+                                        <li> <%= link_to "View", company %></li>
+                                        <li> <%= link_to "Edit", edit_company_path(company) %></li>
+                                        <li> <%= button_to "Delete", company, method: :delete, data: { confirm: 'Are you sure?' }%></li>
+
+                                    </ul>
+                                </td>
+
+                            </tr>
+
+      
+      
+       <% end %>
+       
+      

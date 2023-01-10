@@ -1,0 +1,27 @@
+
+
+
+       
+              <% @company_sales_targets.each do |target| %>
+
+                            <tr id="<%= dom_id target %>">
+                                <td><%= target.company.name %></td>
+                                <td>
+                                            <%= humanized_money_with_symbol(target.target) %>
+                                </td>
+                                <td>
+                                <ul class="d-flex action-btn">
+                                        <li> <%= link_to "View", target %></li>
+                                        <li> <%= link_to "Edit", edit_company_sales_target_path(target) %></li>
+                                        <li> <%= button_to "Delete", target, method: :delete, data: { confirm: 'Are you sure?' }%></li>
+
+                                    </ul>
+                                </td>
+
+                            </tr>
+
+      
+      
+       <% end %>
+       
+      

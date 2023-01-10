@@ -1,0 +1,2 @@
+module UserSalesTargetsHelper
+end

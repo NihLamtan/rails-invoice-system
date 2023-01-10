@@ -1,0 +1,241 @@
+
+
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="row ">
+                        <div class="col-8">
+                            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link active" id="home-tab" data-bs-toggle="tab"
+                                        data-bs-target="#home" type="button" role="tab" aria-controls="home"
+                                        aria-selected="true">1. CLIENT</button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link" id="profile-tab" data-bs-toggle="tab"
+                                        data-bs-target="#profile" type="button" role="tab" aria-controls="profile"
+                                        aria-selected="false">2. ITEMS</button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link" id="contact-tab" data-bs-toggle="tab"
+                                        data-bs-target="#contact" type="button" role="tab" aria-controls="contact"
+                                        aria-selected="false">3. OPTIONS</button>
+                                </li>
+                            </ul>
+                        <%= form_with(model: [:super_admin, invoices],  data: { controller: "invoice", turbo: false }) do |form| %>
+                              <%# <%= form.hidden_field :company_id, value: 1 %>
+                            <div class="tab-content" id="myTabContent">
+                                <div class="tab-pane fade show active" id="home" role="tabpanel"
+                                    aria-labelledby="home-tab">
+                                   
+                                     <div class="mb-3  row mt-4">
+                                        <label for="inputPassword" class="col-sm-3 col-form-label">Select Company
+                                            
+                                            </label>
+                                        <div class="col-sm-9">
+                         <%= form.collection_select(:company_id, Company.order(:name), :id, :name , {include_blank: 'Select', disable: :true},  {id: "company_select", class: 'form-select form-control', required: true})  %>
+
+                                           
+                                        </div>
+
+                                    </div>
+                                 <div  class="d-none"  id="client-data" data-invoice-target="clientResult" data-invoice-fetch-url-value="<%= super_admin_root_url %>">
+                                    
+                                    <div class="mb-3 client-fields row mt-4">
+                                        <label for="inputPassword" class="col-sm-3 col-form-label">Client</label>
+                                        <div class="col-sm-9">
+                                        <%= select_tag(:client_id, options_for_select(["new"], "new"), {id: "client_select_option", class: "form-control", name: "invoice[client_id]"}) %>
+
+                                        
+
+                                    </div>
+                                    </div>
+
+                                   
+
+                              
+                                
+                                    </div>
+
+
+                                </div>
+                                <div class="tab-pane fade " id="profile" role="tabpanel" aria-labelledby="profile-tab">
+
+                                    <div class="row mt-4 align-items-center justify-content-center  input_fields_wrap">
+                                        <div class="col-5">
+                                          <%= text_field_tag 'invoice[items][0][description]', {},  { class: "form-control", placeholder: 'Services', required: true} %>
+                                         
+                                        </div>
+                                        <div class="col-3">
+                                        <div>
+                                            <div class="input-group mb-3 usd">
+                                            <%= text_field_tag 'invoice[items][0][price]', nil, class: "form-control", placeholder: "0.00", required: true%>
+                                            </div>
+                                        </div>
+
+                                        </div>
+                                         <div class="col-1 " >
+                                         <div class="input-group mb-3 usd create-field" style="display: none;">
+                                          <%= text_field_tag 'invoice[items][0][quantity]', nil, class: "form-control", placeholder: "1"%>
+                                         </div>
+                                        </div>
+                                        <div class="col-3">
+                                            <div class="d-flex align-items-center ">
+                                                <div class="form-icons">
+                                               
+                                                <a href="javascript:;" class="show-btn">
+                                                    <i class="fa-solid fa-square-pen"></i>
+                                                    </a>
+                                                    <%# <i class="fa-solid fa-bars"></i> %>
+                                                    <i class="fa-solid fa-trash-can"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="add_another_field_row remove_parent">
+                                    </div>
+                              
+                                    
+                                   
+
+                                    <div class="row justify-content-center">
+                                        <div class="col-6">
+                                        <div class="d-block">
+                                        <a href="#" class="form-items-btn add_field_button ">ADD Another Item</a>
+                                        </div>
+
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                                <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+
+
+                                    <div class="tab-pane fade show active" id="home" role="tabpanel"
+                                        aria-labelledby="home-tab">
+
+                                        <div class="mb-3 client-fields row mt-4">
+                                            <label for="inputPassword" class="col-sm-3 col-form-label">Currency</label>
+                                            <div class="col-sm-9">
+
+
+                                               <%= form.collection_select :currency, Currency.all, :iso_code, :iso_code, {}, { class: 'form-control' } %>
+
+                                            </div>
+
+                                        </div>
+
+
+                                        <div class="mb-3  row">
+                                            <label for="inputPassword" class="col-sm-3 col-form-label">Notes
+                                            </label>
+                                            <div class="col-sm-9">
+                                            <%= form.text_area :note, class: "form-control", placeholder: "Notes", rows: 4 %>
+
+                                                <%# <textarea class="form-control" id="exampleFormControlTextarea1" rows="4"
+                                                    placeholder="Notes"></textarea> %>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="mb-3  row align-items-center">
+                                            <label for="inputPassword" class="col-sm-3 col-form-label">Discount
+                                            </label>
+                                            <div class="col-sm-9">
+                                                <div class="input-group ">
+                                                    <span class="input-group-text"
+                                                        id="inputGroup-sizing-default">USD</span>
+                                                        <%= form.text_field :discount, class: "form-control", placeholder: "Discount" %>
+
+
+                                                </div>
+                                            </div>
+                                            <%# <div class="col-sm-3">
+                                                <label for="" class="usd-amount">Use USD Amount</label>
+
+                                            </div> %>
+
+                                        </div>
+
+                                        <div class="mb-3  row align-items-center">
+                                            <label for="inputPassword" class="col-sm-3 col-form-label">Sales Tax
+                                            </label>
+                                            <div class="col-sm-5">
+                                              <%= form.text_field :sale_tax, class: "form-control", placeholder: "Tax Name (Tax ID)"  %>
+                                             
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <div class="input-group ">
+                                              <%= form.text_field :tax, class: "form-control", placeholder: "0.00"  %>
+
+                                                    <span class="input-group-text"
+                                                        id="inputGroup-sizing-default">%</span>
+
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+
+
+
+
+                                        <div class="form-check form-switch">
+                                        <%= form.label :accept_credit_card, "Accecpt Credit
+                                                Card", class: "form-check-label" %>
+                                           
+                                                <%= form.check_box :accept_credit_card, class: "form-check-input" %>
+                                      
+                                        </div>
+                                        <div class="form-check form-switch">
+                                        <%= form.label :accept_paypal, "Accecpt
+                                                Paypal", class: "form-check-label" %>
+                                           
+                                                <%= form.check_box :accept_paypal, class: "form-check-input" %>
+
+                                           
+
+                                        </div>
+
+
+
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                        </div>
+                        <div class="col-3">
+                            <div class="clints-pays">
+                                <h3 class="new">
+                                    new
+                                </h3>
+
+                                <h5 class="client">
+                                    <li>clients</li>
+                                    <li>Total: usd 0.00</li>
+
+                                    <!-- <li>pay Automatically</li> -->
+                                    <!-- <li>you havent turned on credit card</li> -->
+                                    <!-- <li>payments for this accounts</li> -->
+                                </h5>
+                                 <%= form.submit class: "btn btn-primary" %>
+                                <button type="button" class="btn-draft btn-primary">Save as Draft</button>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+
+<% end %>
+
+
+
+

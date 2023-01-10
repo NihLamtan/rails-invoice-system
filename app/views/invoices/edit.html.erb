@@ -1,0 +1,354 @@
+        <style>
+        .modal-dialog{
+        max-width:40rem;
+        }
+        </style>
+          
+           <div class="bg">
+                <div class="row">
+                    <div class="col-7">
+                        <h2 class="table-heading">
+                            Edit Invoice
+                        </h2>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="row ">
+                        <div class="col-8">
+                            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link active" id="home-tab" data-bs-toggle="tab"
+                                        data-bs-target="#home" type="button" role="tab" aria-controls="home"
+                                        aria-selected="true">1. CLIENT</button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link" id="profile-tab" data-bs-toggle="tab"
+                                        data-bs-target="#profile" type="button" role="tab" aria-controls="profile"
+                                        aria-selected="false">2. ITEMS</button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link" id="contact-tab" data-bs-toggle="tab"
+                                        data-bs-target="#contact" type="button" role="tab" aria-controls="contact"
+                                        aria-selected="false">3. OPTIONS</button>
+                                </li>
+                            </ul>
+                        <%= form_with(model: @invoice, data: { controller: "invoice" }) do |form| %>
+                              <%= form.hidden_field :company_id, value: 1 %>
+                            <div class="tab-content" id="myTabContent">
+                                <div class="tab-pane fade show active" id="home" role="tabpanel"
+                                    aria-labelledby="home-tab">
+                                  
+                                    <div   id="client-data" data-invoice-target="clientResult">
+                                    <div class="mb-3 client-fields row mt-4">
+                                        <label for="inputPassword" class="col-sm-3 col-form-label">Client</label>
+                                        <div class="col-sm-9">
+                                         <%= form.collection_select :client_id, Client.all, :id, :name, { include_blank: "New" }, { class: "form-select form-control", data: {  'invoice-target': "selectClient" } } %>
+
+                                        </div>
+
+                                    </div>
+
+                                    <div class="mb-3  row">
+                                        <label for="inputPassword" class="col-sm-3 col-form-label">Client
+                                            Name</label>
+                                        <div class="col-sm-9">
+                                       
+                       <%= form.text_field :client_name, data: { "invoice-target": 'clientName' }, class: "form-control", placeholder: "Client Name", value: @invoice.client.name %>
+
+                                           
+                                        </div>
+
+                                    </div>
+
+                                    <div class="mb-3  row">
+                                        <label for="inputPassword" class="col-sm-3 col-form-label">Client
+                                            Email</label>
+                                        <div class="col-sm-9">
+                                         <%= form.text_field :client_email, data: { "invoice-target": 'clientEmail' }, class: "form-control", placeholder: "Client Email", value: @invoice.client.email%>
+
+                                      
+                                        </div>
+
+                                    </div>
+
+                                    <div class="mb-3  row">
+                                        <label for="inputPassword" class="col-sm-3 col-form-label">Client
+                                            Phone</label>
+                                        <div class="col-sm-9">
+                                           <%= form.text_field :client_phone, data: { "invoice-target": 'clientPhone' }, class: "form-control", placeholder: "Client Phone", value: @invoice.client.phone %>
+
+                                      
+                                        </div>
+
+                                    </div>
+                                    </div>
+
+
+                                </div>
+                                <div class="tab-pane fade " id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                                <% @invoice.items.each_pair do |key, item| %>
+                                    <div class="row mt-4 align-items-center justify-content-center  input_fields_wrap">
+                                    
+                                        <div class="col-5">
+                                          <%= text_field_tag "invoice[items][#{key}][description]", item['description'], { class: "form-control", placeholder: 'Services'} %>
+                                         
+                                        </div>
+
+                                        <div class="col-3">
+                                        <div>
+                                            <div class="input-group mb-3 usd">
+                                                <span class="input-group-text" id="inputGroup-sizing-default">USD</span>
+                                            <%= text_field_tag "invoice[items][#{key}][price]", nil, class: "form-control", placeholder: "0.00" %>
+                                            </div>
+                                        </div>
+
+                                        </div>
+                                         <div class="col-1" >
+                                         <div class="input-group mb-3 usd create-field" style="display: none;">
+                                          <%= text_field_tag "invoice[items][#{key}][quantity]", nil, class: "form-control", placeholder: "1"%>
+                                         </div>
+                                        </div>
+                                        <div class="col-3">
+                                            <div class="d-flex align-items-center ">
+                                                <div class="form-icons">
+                                               
+                                                <a href="javascript:;" class="show-btn">
+                                                    <i class="fa-solid fa-square-pen"></i>
+                                                    </a>
+                                                    <i class="fa-solid fa-bars"></i>
+                                                    <i class="fa-solid fa-trash-can"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <% end %>
+
+                                    <div class="row align-items-center justify-content-end add_another_field_row">
+                                    
+                                    </div>
+                                        <a href="#" class="form-items-btn add_field_button">ADD Another Item</a>
+
+
+                                </div>
+                                <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+
+
+                                    <div class="tab-pane fade show active" id="home" role="tabpanel"
+                                        aria-labelledby="home-tab">
+
+                                        <div class="mb-3 client-fields row mt-4">
+                                            <label for="inputPassword" class="col-sm-3 col-form-label">Currency</label>
+                                            <div class="col-sm-9">
+
+
+                                               <%= form.collection_select :currency, Currency.all, :iso_code, :iso_code, {}, { class: 'form-control' } %>
+
+                                            </div>
+
+                                        </div>
+
+
+                                        <div class="mb-3  row">
+                                            <label for="inputPassword" class="col-sm-3 col-form-label">Notes
+                                            </label>
+                                            <div class="col-sm-9">
+                                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="4"
+                                                    placeholder="Notes"></textarea>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="mb-3  row align-items-center">
+                                            <label for="inputPassword" class="col-sm-3 col-form-label">Discount
+                                            </label>
+                                            <div class="col-sm-6">
+                                                <div class="input-group ">
+                                                    <span class="input-group-text"
+                                                        id="inputGroup-sizing-default">USD</span>
+                                                                    <%# <%= form.text_field :discount, class: "form-control", placeholder: "Discount"  %>
+
+
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-3">
+                                                <label for="" class="usd-amount">Use USD Amount</label>
+
+                                            </div>
+
+                                        </div>
+
+                                        <div class="mb-3  row align-items-center">
+                                            <label for="inputPassword" class="col-sm-3 col-form-label">Sales Tax
+                                            </label>
+                                            <div class="col-sm-5">
+                                              <%= form.text_field :tax_name, class: "form-control", placeholder: "Enter Sales Tax"  %>
+                                             
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <div class="input-group ">
+
+                                                    <input type="text" class="form-control"
+                                                        aria-label="Sizing example input"
+                                                        aria-describedby="inputGroup-sizing-default" placeholder="0.00">
+                                                    <span class="input-group-text"
+                                                        id="inputGroup-sizing-default">%</span>
+
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+
+
+
+
+                                        <div class="form-check form-switch">
+                                        <%= form.label :accept_credit_card, "Accecpt Credit
+                                                Card", class: "form-check-label" %>
+                                           
+                                                <%= form.check_box :accept_credit_card, class: "form-check-input" %>
+                                      
+                                        </div>
+                                        <div class="form-check form-switch">
+     <%= form.label :accept_paypal, "Accecpt
+                                                Paypal", class: "form-check-label" %>
+                                           
+                                                <%= form.check_box :accept_paypal, class: "form-check-input" %>
+
+                                           
+
+                                        </div>
+
+
+
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                        </div>
+                        <div class="col-3">
+                            <div class="clints-pays">
+                                <h3 class="new">
+                                    new
+                                </h3>
+
+                                <h5 class="client">
+                                    <li>clients</li>
+                                    <li>Total: usd 0.00</li>
+
+                                    <!-- <li>pay Automatically</li> -->
+                                    <!-- <li>you havent turned on credit card</li> -->
+                                    <!-- <li>payments for this accounts</li> -->
+                                </h5>
+                                <% if @invoice.paid? || @invoice.partial_refund? %>
+
+                                <ul class="invoice-action-btn">
+                                
+                                <li>  <button type="button" class="btn-draft btn-primary mt-3">Send Receipt</button></li>
+                                <li>  <button type="button" class="btn-draft btn-primary mt-3">View</button></li>
+                                <li>  <button type="button" class="btn-draft btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#refund-modal">
+                                Refund
+                                </button></li>
+
+                                
+                                 <%= form.submit class: "btn btn-primary mt-3" %>
+                                </ul>
+                                 <% end %>
+
+                                <% if @invoice.status == "unpaid" %>
+                                 <ul class="invoice-action-btn">
+                                <li>  <button type="button" class="btn-draft btn-primary mt-3">Pay Invoice</button></li>
+                                <li>  <button type="button" class="btn-draft btn-primary mt-3">Send Reminder</button></li>
+                                <li>  <button type="button" class="btn-draft btn-primary mt-3">View</button></li>
+                               
+
+                                
+                                 <%= form.submit class: "btn btn-primary mt-3" %>
+                                </ul>
+                                 <% end %>
+
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+
+<% end %>
+
+
+
+
+<!-- Button trigger modal -->
+
+
+<!-- Modal -->
+
+
+<!-- Modal -->
+<div class="modal fade" id="refund-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <%= form_with(url: invoice_refund_index_path(@invoice)) do |form| %>
+    
+
+        <div class="modal-content">
+            <div class="modal-header d-block">
+                <h5 class="modal-title hd-sm blue" id="exampleModalLabel"> Invoice #1000 <span id="invoice-id"></span> <span class="gray hd-xsm">for <%= @invoice.client.name %> </h5> 
+                <hr>
+                <div class="modal-option d-flex align-items-center">
+                <div class="checkbox">
+               
+                <%= form.radio_button :refund_option, "full_refund" %>
+
+                </div> 
+                <label for="pay-cash" dusk="pay-cash-option" class="px-2"><strong>Full Refund</strong><br> <small>This invoice will be refunded in full.</small></label>
+                </div>
+                <div class="modal-option d-flex align-items-center">
+                <div class="checkbox">
+                <%= form.radio_button :refund_option, "partial_refund" %>
+                </div> 
+                <label for="pay-cash" dusk="pay-cash-option" class="px-2"><strong>Partial Refund</strong><br> <small>You can refund any amount up to the full amount.</small></label>
+                    
+                </div>
+                    <div class="input-group mb-3 refunded-amount-field">
+    <div class="input-group-prepend">
+        <span class="input-group-text" id="inputGroup-sizing-default">USD</span>
+    </div>
+    <%= form.text_field :refunded_amount, class: "form-control", min: 0, max: @invoice.total_cents %>
+</div>
+                <hr>
+                <div class="d-flex align-items-center justify-content-between">
+                   <h5>The amount due is <span id="invoice-amount" class="blue"><%= humanized_money_with_symbol(@invoice.total_cents) %></span></h5>
+                   <div class="d-flex align-items-center justify-content-end">
+                     <%= form.submit "Refund", class: "btn btn-primary rounded" %>
+                   </div>
+                </div>
+              
+              
+            </div>
+
+        </div>
+        
+  <% end %>
+    </div>
+</div>
+
+
+
+<!-- Button trigger modal -->
+
+ 
+<!-- Modal -->

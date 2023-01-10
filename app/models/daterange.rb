@@ -1,0 +1,2 @@
+class Daterange < ApplicationRecord
+end

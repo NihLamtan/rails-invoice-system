@@ -1,0 +1,52 @@
+    <section class="login-sec">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-5">
+                <div class="logo text-center">
+                <%= image_tag "inviz-logo" %>
+                    <img src="./images/logo1-7c00fc79957968ed8db5d9c5dd9d65cc2da09c6abd826e52eeaa68d2952d3d7a.png"
+                        alt="">
+                </div>
+                <h1 class="form-heading">
+                    
+Change your password
+                </h1>
+
+
+
+<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
+  <%= render "devise/shared/error_messages", resource: resource %>
+ <%= f.hidden_field :reset_password_token %>
+                    <div class="mb-3">
+                      <%= f.label :password, "New password", class: "form-label" %>
+                      <% if @minimum_password_length %>
+                      <em>(<%= @minimum_password_length %> characters minimum)</em><br />
+                    <% end %>
+                    <%= f.password_field :password, autofocus: true, autocomplete: "new-password", class: "form-control" %>
+                    </div>
+
+                    <div class="mb-3">
+                       <%= f.label :password_confirmation, "Confirm new password", class: "form-label" %><br />
+                       <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control" %>
+                    </div>
+                   <div class="mb-3">
+                <%= render "devise/shared/links" %>
+
+                   </div> 
+                      
+                     <%= f.submit "Change my password", class: "btn btn-primary login-form-btn" %>
+
+               <% end %>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
+
+
+
+

@@ -1,0 +1,112 @@
+
+            <div class="bg-view">
+                <div class="row ">
+                    <div class="col-12">
+                        <h2 class="table-heading">
+                            User View
+                        </h2>
+                    </div>
+                </div>
+
+                        <div class="row ">
+                            <div class="col-12">
+                    <div class="card">
+
+                                <h1 class="applicant">
+                                    User  Detail
+
+                                    <p>This view Show user Detail</p>
+                                </h1>
+                                <div class="border"></div>
+                        <div class="row ">
+                            <div class="col-4">
+                                <div class="main-div">
+                                    <h1 class="main-heading">
+                                    <% if @user.name %>
+                                        <li>Name</li>
+
+                                    <% end %>
+                                        <li>Email</li>
+                                        <li>Department</li>
+                                        <li>Company</li>
+                                        <li>Target</li>
+                                        <li>Target Acheived</li>
+                                        <li>Role</li>
+
+
+                                        <!-- <li class="attachment">Atachments</li> -->
+                                    </h1>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="div-2nd">
+                                    <h1 class="heading-2nd">
+                                    <% if @user.name  %>
+                                        <li><%= @user.name %></li>
+                                        
+                                        <% end %>
+                                        <li><%= @user.email %></li>
+                                        <li><%= @user.department %></li>
+                                        
+                                        <% @user.companies.each do |c| %>
+                                        <li><%= c.name %></li>
+                                        <% end %>
+                                        <% @user.user_sales_targets.each do |t| %>
+                                        <li><%= t.created_at %> <span>( <%= humanized_money_with_symbol(t.target) %> )</span></li>
+                                            
+                                            <%# <%= Date.parse(t.created_at, '%m-%d-%Y') %> 
+                                        <% end %>
+                                        <li><%= @user.role %></li>                    
+                                    </h1>
+                                  
+                                    <!-- <div class="resume mr-top">
+                                        <div class="border">
+                                            <div class="btn-content">
+                                            resume-back-end-developer.pdf <a href="#" class="btn">Download</a>
+                                            </div>
+                                        </div>
+                                        <div class="border">
+                                            <div class="btn-content">
+                                            coverletter-back-end-developer.pdf <a href="#" class="btn">Download</a>
+                                            </div>
+                                        </div>
+                                    </div> -->
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+
+
+        </div>
+          
+            <div class="row">
+                <div class="col-6">
+                <div class="chart-box">
+                    <h3>Target Achieved</h3>
+                       <%= line_chart @target_achieved, prefix: "$", thousands: "," %>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="chart-box">
+                    <h3>Refunded</h3>
+                    <% if @refunded_amount %>
+                       <%= line_chart @refuned_invoice, prefix: "$", thousands: "," %>
+                       <% else  %>
+                    <p>No refunded invoice</p>
+
+                    <% end %>
+                </div>
+            </div>
+        </div>
+
+ 
+ 
+ 

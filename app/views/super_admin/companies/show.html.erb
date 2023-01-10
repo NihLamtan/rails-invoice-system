@@ -1,0 +1,179 @@
+
+            <div class="bg-view">
+                <div class="row ">
+                    <div class="col-8">
+                        <h2 class="table-heading">
+                            Company View
+                        </h2>
+                    </div>
+                    <div class="col-4">
+                    <%= link_to 'Connect Company Payment Marchant', paypal_super_admin_company_path, class: "btn btn-primary create-btn" %>
+                    </div>
+                </div>
+
+                        
+                    <div class="card">
+                                <h1 class="applicant">
+                                    Company  Detail
+
+                                    <p>This view Show Company Detail</p>
+                                </h1>
+                                <div class="border"></div>
+                                  <div class="row">
+                        <div class="col-6">
+                            <ul>
+                                <div class="d-flex justify-content-between view-detail align-items-center">
+                                    <li class="">Name</li>
+                                   
+                                    <p> <%= @company.name %></p>
+                                </div>
+                                 <div class="d-flex justify-content-between view-detail align-items-center">
+                                    <li class="">Email</li>
+                                    <p> <%= @company.email %></p>
+
+                                </div>
+                                 <div class="d-flex justify-content-between view-detail align-items-center">
+                                    <li class="">Logo</li>
+                                    <% if @company.logo.attached? %>    
+                                    <%= image_tag @company.logo.variant(:thumb) %>
+                                    <% else  %>
+                                        <p>This company logo no attached</p>
+                                    <% end %>
+                                </div>
+                                 <div class="d-flex justify-content-between view-detail align-items-center">
+                                    <li class="">About</li>
+                                    <p>lorem ipsum dolor sit amet, con</p>
+                                   
+                                </div>
+                            </ul>
+                        </div>
+                        </div> 
+                      
+                    </div>
+
+         
+
+
+                    <div class="card mt-5">
+
+      <div class="row ">
+                <div class="col-12">
+
+                    <table class="table">
+                        <thead>
+                            <tr>    
+                                <th scope="col">Id</th>
+                                <th scope="col">Brand</th>
+                                <th scope="col">Client</th>
+                                <th scope="col">Total</th>
+                                <th scope="col">Status</th>
+                                <th scope="col">User</th>
+                                <th scope="col">Pay Link</th>
+
+                                
+                            
+
+                                
+
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                                <% @invoices.each do |i| %>
+                            <tr>
+                                <th scope="row">#001</th>
+                                <td>  
+                                
+                                <%= link_to "#{i.company.name}", company_path(i.company.id) %>
+                               
+                               </td>
+                                <td>
+                                   <%= link_to "#{i.client.name}", client_path(i.client.id) %>
+                                </td>
+                                <td> <%= humanized_money_with_symbol(i.total)  %></td>
+                                <td class="status payment-status-<%= i.status %>"><span><%= i.status %></span></td>
+                                <td>
+                                    <%= i.user.name %> 
+                                </td>
+                                 
+                              <% if i.payment_link %>
+                <td >
+
+                <input id="copyText" value="http://127.0.0.1:3000/invoice/<%= i.payment_link %>"  data-bs-toggle="tooltip" data-bs-placement="top" title="Click Copy To Text">
+
+                </td>
+                <% else %>
+                <td></td>
+                <% end %>
+                              
+                                
+                              
+
+                            </tr>
+                        <% end %>
+
+                          
+
+               
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+         
+
+            <div class="row">
+<div class="col-12">
+
+<%= will_paginate @invoices, renderer: WillPaginate::ActionView::BootstrapLinkRenderer, list_classes: %w(pagination justify-content-end) %>
+
+</div>
+
+</div>
+
+            </div>
+            
+
+
+
+        </div>
+
+                   <div class="card mt-5">
+
+                  <div class="row ">
+                <div class="col-12">
+
+                    <table class="table">
+                        <thead>
+                            <tr>    
+                                <th scope="col">Company</th>
+                                <th scope="col">Target</th>
+                                <th scope="col">Target Assign</th>
+                                <th scope="col">Target Create</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                                <% @targets.each do |t| %>
+                            <tr>
+                            
+                                <td><%= t.company.name %></td>
+                                <td><%= humanized_money_with_symbol(t.target) %></td>
+                                <td><%= t.user.name %></td>
+                                <td><%= t.date.strftime("%B %d, %Y") %></td>
+
+                            </tr>
+                        <% end %>
+
+                          
+
+               
+                        </tbody>
+                    </table>
+                </div>
+                </div>
+
+            </div>
+        
+     
+ 
+
+

@@ -1,0 +1,13 @@
+.invoice-settings {
+    font-family: 'Roboto', sans-serif;
+    font-size: 40px;
+    font-weight: 600;
+    color: #337ab7;
+}
+
+.invoice-setting-forms .form-control {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 16px;
+    color: black;
+    padding: 12px;
+}

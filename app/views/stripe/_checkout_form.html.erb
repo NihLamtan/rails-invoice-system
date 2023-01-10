@@ -1,0 +1,21 @@
+
+<form id="payment-form" 
+    data-controller="stripe"
+    data-stripe-client-secret-key-value="<%= payment_intent.client_secret %>"
+    data-stripe-invoice-id-value="<%= invoice.id %>"
+    data-stripe-company-id-value="<%= invoice.company.id %>"
+    data-stripe-client-id-value="<%= invoice.client.id %>"
+    data-stripe-client-email-value="<%= invoice.client.email %>"
+    
+    data-action="stripe#confirmPayment"> 
+
+  <div id="payment-element">
+    <!-- Elements will create form elements here -->
+  </div>
+   <%# <button type="submit" class="btn btn-primary checkout-form-btn">Pay</button> %>
+  <div id="error-message">
+    <!-- Display error message to your customers here -->
+  </div>
+  <button id="submit" class="btn btn-primary checkout-form-btn mt-3">Pay</button>
+
+</form>

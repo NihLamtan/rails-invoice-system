@@ -1,0 +1,3 @@
+class ConnectStripeAccountController < ApplicationController
+   
+end

@@ -1,0 +1,78 @@
+
+        
+
+                        <%= form_with(model: [:super_admin,  company_sales_target]) do |form| %>
+ <% if company_sales_target.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(company_sales_target.errors.count, "error") %> prohibited this company_sales_target from being saved:</h2>
+
+      <ul>
+        <% company_sales_target.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+            <div class="row">
+                <div class="col-7">
+   
+                                  
+                                    <div class="form-field-client">
+                                    <div class="row ">
+                                     <%= form.label :company, class: "col-sm-2 col-form-label font-weight-semibold" %>
+                               
+                                        <div class="col-sm-9">
+                                        <%= form.collection_select(:company_id, Company.order(:name), :id, :name , {},  {class: 'form-select form-control', required: true}) %>                                        </div>
+
+                                    </div>
+
+
+      <div class="row ">
+                                     <%= form.label :Admin, class: "col-sm-2 col-form-label font-weight-semibold" %>
+                               
+                                        <div class="col-sm-9">
+                                        <%= form.collection_select(:user_id, User.where(role: 'admin'), :id, :name , {include_blank: 'Select Admin'},  {class: 'form-select form-control', required: true}) %>                                        </div>
+
+                                    </div>
+
+                                    <div class="row">
+                                       <%= form.label :target, class: "col-sm-2 col-form-label  font-weight-semibold" %>
+                                        <div class="col-sm-9">
+                                            <%= form.text_field :target,  class: "form-control",  required: true  %>
+                                        </div>
+                                    </div>
+
+     <div class="row">
+                                       <%= form.label :Date, class: "col-sm-2 col-form-label  font-weight-semibold" %>
+                                        <div class="col-sm-9">
+                                            <%= form.date_field :date,  class: "form-control",  required: true  %>
+                                        </div>
+                                    </div>
+
+                                  
+                                </div>
+                                </div>
+                              
+                                 <div class="col-3">
+                            <div class="clints-pays mt-0">
+                                <h3 class="new">
+                                    new
+                                </h3>
+
+                               
+                                 <%= form.submit "Create", class: "btn btn-primary" %>
+
+                                  </div>
+                               </div>
+                           </div>
+                        </div>
+                     <% end %>
+
+
+
+
+
+ 
+
+      
+     

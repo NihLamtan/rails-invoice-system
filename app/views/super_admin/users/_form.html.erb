@@ -1,0 +1,106 @@
+
+        
+
+                        <%= form_with(model: [:super_admin, @user] ) do |form| %>
+
+                         <% if @user.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this client from being saved:</h2>
+
+      <ul>
+        <% @user.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+            <div class="row">
+                <div class="col-7">
+   
+                                  
+                                    <div class="form-field-client">
+                                    <div class="row ">
+                                     <%= form.label :name, class: "col-sm-2 col-form-label font-weight-semibold" %>
+                               
+                                        <div class="col-sm-9">
+                                          <%= form.text_field :name, class: "form-control", placeholder: "Name", requied: true  %>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="row">
+                                       <%= form.label :email, class: "col-sm-2 col-form-label  font-weight-semibold" %>
+                                        <div class="col-sm-9">
+                                            <%= form.email_field :email, class: "form-control", placeholder: "Emai", requied: true  %>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                       <%= form.label :department, class: "col-sm-2 col-form-label  font-weight-semibold" %>
+
+                                      
+                                        <div class="col-sm-9">
+                                            <%= form.text_field :department, class: "form-control", placeholder: "Department"  %>
+
+                                      
+                                        </div>
+
+                                    </div>
+                                     <div class="row">
+                                       <%= form.label :Company, { class: "col-sm-2 col-form-label" } %>
+                                      
+                                        <div class="col-sm-9 multiple_company_checkbox">
+                                    <%= form.collection_check_boxes :company_ids, Company.all, :id, :name, include_hidden: false %>
+
+                                                                            
+                                        </div>
+
+                                    </div>
+                                       <div class="row">
+                                       <%= form.label :role, class: "col-sm-2 col-form-label  font-weight-semibold" %>
+
+                                      
+                                        <div class="col-sm-9">
+                                             <%= form.select :role, ["admin", "moderator", "salesman"], {}, { class: "form-select form-control" } %>
+
+                                      
+                                        </div>
+
+                                    </div>
+                                    
+                                  
+                                </div>
+                                </div>
+                              
+                                 <div class="col-3">
+                            <div class="clints-pays mt-0">
+                                <h3 class="new">
+                                    new
+                                </h3>
+
+                               
+                                 <%= form.submit class: "btn btn-primary" %>
+
+                            </div>
+                                </div>
+
+
+                           
+
+                        </div>
+                        </div>
+             
+
+<% end %>
+
+
+
+
+
+ 
+
+      
+      
+      
+  

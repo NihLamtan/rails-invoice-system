@@ -1,0 +1,111 @@
+
+      <div class="bg">
+
+                <div class="row justify-content-center align-items-center">
+                    <div class="col-12">
+                        <h2 class="table-heading">
+                            Users
+                                                    </h2>
+                        
+                    </div>
+
+                </div>
+                <div class="row align-items-center justify-content-between mb-3">
+                    
+                    <div class="col-8">
+                        <div class="input-group  search-bar">
+                            <input type="text" class="form-control" placeholder="Search"
+                                aria-label="Example text with button addon" aria-describedby="button-addon1">
+                        </div>
+
+                    </div>
+                    <div class="col-2">
+                        <%= link_to "Creat User", new_user_path, class: "btn btn-primary create-btn", data:{turbo:false} %>
+                    </div>
+                </div>
+
+ 
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-12">
+
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Name</th>
+                                <th scope="col">Email</th>
+                                <th scope="col">Department</th>
+                                <th scope="col">Role</th>
+                                <th></th>
+                                
+                            
+
+
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                          
+                                      
+              <% @users.each do |u| %>
+
+                            <tr id="<%= dom_id u %>">
+                                <td><%= u.name %></td>
+                                <td><%= u.email %></td>
+                                <% if u.department %>
+                                <td><%= u.department %></td>
+                                <% else %>
+                                 <td></td>                                  
+                                <% end %>
+                                <% if u.role %>                                  
+                                <td><%= u.role %></td>
+                                <% else %>
+                                    <td></td>
+                                <% end %>
+                                   
+                                <td>
+                                <ul class="d-flex action-btn">
+                                        <li> <%= link_to "View", u %></li>
+                                        <li> <%= link_to "Edit", edit_user_path(u) %></li>
+                                        <li> <%= button_to "Delete", u, method: :delete, data: { confirm: 'Are you sure?' }%></li>
+
+                                    </ul>
+                                </td>
+
+                            </tr>
+
+      
+      
+       <% end %>
+       
+      
+
+               
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+
+
+
+
+
+
+
+
+<div class="row">
+<div class="col-12">
+
+<%= will_paginate @users, renderer: WillPaginate::ActionView::BootstrapLinkRenderer, list_classes: %w(pagination justify-content-end) %>
+
+</div>
+
+</div>
+
+
+
+
+
+
+

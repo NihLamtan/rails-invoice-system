@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>InvoiceSystem</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= stylesheet_link_tag "app.min", "data-turbo-track": "reload" %>
+    <%= stylesheet_link_tag "custom", "data-turbo-track": "reload" %>
+
+
+    <%= javascript_include_tag STRIPE_JS_HOST %>
+ <%= stylesheet_link_tag "settings", "data-turbo-track": "reload" %>
+
+
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+
+    <%= stylesheet_link_tag "custom", "data-turbo-track": "reload" %>
+
+    <%= stylesheet_link_tag "style", "data-turbo-track": "reload" %>
+
+
+    <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
+    
+    
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.1/css/bootstrap.min.css">
+    <%= javascript_tag do %>
+      const stripe = Stripe('pk_test_51KEN8rIgCmSXEQIaT3y1E3KrynHh5855nWw7V0rOFg644Mv0pEe8V4YwOY5Y1waYHXLED01yBKVLegrcq6illuqh00jPpSKlyA')
+  <% end %>
+  </head>
+
+  <body>
+    <div class="container">
+        <%= yield %>
+    </div>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.1/js/bootstrap.min.js"></script>
+  </body>
+</html>

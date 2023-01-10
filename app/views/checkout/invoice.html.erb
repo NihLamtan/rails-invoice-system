@@ -1,0 +1,95 @@
+
+   
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-5">
+          <h1 class="invoice-heading">
+            invoice #0472
+          </h1>
+        </div>
+        <div class="col-5">
+          <div class="logo">
+          <% if @invoice.company.logo.attached? %>
+          <%= image_tag @invoice.company.logo %>
+            <% end  %>
+          </div>
+          <h4 class="invoice-sub-heading">
+            Themesberg Inc.
+            <p>
+              291 N 4th st,San Jose, CA 95112, USA <br>
+              August 1 2022
+            </p>
+          </h4>
+
+        </div>
+      </div>
+      <div class="row justify-content-center">
+        <div class="col-10">
+          <h4 class="bill">
+            INVOICE TO
+          </h4>
+         
+          <address><%= @invoice.company.name %>,<br> Selby3864 Johnson Street,<br> United States of America VAT<br> Code:
+            AA-1234567890</address>
+
+        </div>
+      </div>
+      <div class="row justify-content-center">
+        <div class="col-10">
+          <table class="table">
+            <thead>
+              <tr>
+             
+                <th scope="col">Item</th>
+                <th scope="col">QTY</th>
+                <th scope="col">Price</th>
+                <th scope="col">TOTAL</th>
+              </tr>
+            </thead>
+            <tbody>
+            <% @invoice.items.each_pair do |key, item| %>
+              <tr>
+               
+                
+                <td><%= item['description'] %></td>
+                <td></td>    
+                <td><%= convert_to_money_object_and_humanized(item['price'], @invoice.currency) %></td>
+                <td></td>
+              </tr>
+              <% end %>     
+    
+            </tbody>
+
+          </table>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-11 d-flex justify-content-end">
+
+          <div class="table-footer">
+
+            <ul>
+              <li>SUBTOTAL <span><%= humanized_money_with_symbol(@invoice.price ) %></span></li>
+              <li>TAX RATE <span><%= @invoice.tax %></span></li>
+              <li>DISCOUNT <span><%= humanized_money_with_symbol(@invoice.discount ) %></span></li>
+              <li class="bold">TOTAL <span class="bold total-amount"><%= humanized_money_with_symbol(@invoice.total ) %></span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="invoice-bottom">
+        <% if @invoice.paid? %>
+            <h1>This Invoice Has Been Paid</h1>
+        
+          <% elsif @invoice.refunded? %>
+            <h1>This Invoice Has Been Refunded</h1>
+
+             <% elsif @invoice.unpaid? %>
+            <h1>This Invoice Has Been unpaid</h1>
+
+              <% elsif @invoice.partial_refund? %>
+            <h1>This Invoice Has Been Partial Refund</h1>
+
+        <% end %>
+    </div>

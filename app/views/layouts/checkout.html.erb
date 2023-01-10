@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>InvoiceSystem</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+
+    <%= stylesheet_link_tag "checkout", "data-turbo-track": "reload" %>
+    <%= stylesheet_link_tag "invoice", "data-turbo-track": "reload" %>
+
+
+    <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
+
+    <%= javascript_include_tag STRIPE_JS_HOST %>
+
+
+
+ <%= javascript_tag do %>
+      const stripe = Stripe('pk_test_51KEN8rIgCmSXEQIaT3y1E3KrynHh5855nWw7V0rOFg644Mv0pEe8V4YwOY5Y1waYHXLED01yBKVLegrcq6illuqh00jPpSKlyA')
+  <% end %>
+  </head>
+
+  <body>
+
+
+            <%= yield %>
+
+   <script
+    id="paypal-sdk-js-src"
+    src="https://www.paypal.com/sdk/js?client-id=Ae1YmHO15XEYZqXh3dFkgT6ER4IfN_TEbM8QbDVx35nkgoqN2FNfBu0tFFzTL6hoHkoaw-rN_oggKtkc&merchant-id=F74RZ239ZQF2L&currency=<%= @invoice.currency %>&disable-funding=credit,card"
+    data-sdk-integration-source="button-factory"
+  >
+  </script>
+ <script>
+
+
+    paypal.Buttons({
+      env: 'sandbox', // Valid values are sandbox and live.
+
+       createOrder: function(data, actions) {
+      // This function sets up the details of the transaction, including the amount and line item details.
+      return actions.order.create({
+        purchase_units: [{
+          amount: {
+            value: "<%= @invoice.total %>" // This will be replaced, I promise
+          }
+        }]
+      });
+    },
+    
+    onApprove: function(data, actions) {
+       return actions.order.capture().then(function(details) {
+        // This function shows a transaction success message to your buyer.
+       window.location.href = `http://127.0.0.1:3000/load_payment?order_id=${details.id}&intent=${details.intent}&status=${details.status}&payment_marchant=paypal&invoice=<%= @invoice.id %>` 
+
+        // alert('Transaction completed by ' + details.payer.name.given_name);
+      });
+
+    }
+  }).render('#paypal-button-container');
+  </script>
+
+  </body>
+</html>

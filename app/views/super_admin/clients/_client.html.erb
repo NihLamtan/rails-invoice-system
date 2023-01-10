@@ -1,0 +1,23 @@
+       <% @clients.each do |client| %>
+
+                            <tr id="<%= dom_id client %>">
+                                <td><%= client.name %></td>
+                                <td><%= client.email %></td>
+                                <td><%= client.phone %></td>
+                                <td><%= client.currency %></td>
+                                                          
+                                <td>
+                                <ul class="d-flex action-btn">
+                                        <li> <%= link_to "View", super_admin_client_path(client) %></li>
+                                        <li> <%= link_to "Edit", edit_super_admin_client_path(client) %></li>
+                                        <li> <%= button_to "Delete", client, method: :delete %></li>
+                                        
+
+                                    </ul>
+                                </td>
+
+                            </tr>
+
+      
+      
+       <% end %>

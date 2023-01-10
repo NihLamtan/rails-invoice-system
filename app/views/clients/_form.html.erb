@@ -1,0 +1,103 @@
+ 
+
+                        <%= form_with(model: client) do |form| %>
+
+            <div class="row">
+                <div class="col-7">
+                     <% if client.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(client.errors.count, "error") %> prohibited this client from being saved:</h2>
+
+      <ul>
+        <% client.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+                                  
+                                    <div class="form-field-client">
+                                    <div class="  row ">
+                                     <%= form.label :name, class: "col-sm-2 col-form-label font-weight-semibold" %>
+                               
+                                        <div class="col-sm-9">
+                                          <%= form.text_field :name, class: "form-control", placeholder: "Name", required: true  %>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="  row">
+                                       <%= form.label :email, class: "col-sm-2 col-form-label  font-weight-semibold" %>
+                                        <div class="col-sm-9">
+                                            <%= form.email_field :email, class: "form-control", placeholder: "Emai", required: true %>
+                                        </div>
+                                    </div>
+
+                                    <div class="  row">
+                                       <%= form.label :phone, class: "col-sm-2 col-form-label  font-weight-semibold" %>
+
+                                      
+                                        <div class="col-sm-9">
+                                            <%= form.text_field :phone, class: "form-control", placeholder: "Phone", required: true  %>
+
+                                      
+                                        </div>
+
+                                    </div>
+                                    
+                                    <div class="  row">
+                                    <label for="" class="col-sm-2 col-form-label  font-weight-semibold">Address (optional)</label>
+                                    
+
+                                      
+                                        <div class="col-sm-9">
+                                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Address"></textarea>
+
+                                      
+                                        </div>
+
+                                    </div>
+
+                                    <div class="  row">
+                                         <%= form.label :Currency, class: "col-sm-2 col-form-label  font-weight-semibold" %>
+
+                                        <div class="col-sm-9">
+                                           <%= form.text_field :currency, class: "form-control", placeholder: "Currency"  %>
+                                        </div>
+                                       </div>
+                                    </div>
+                                    
+                                 
+                                </div>
+                                 <div class="col-3">
+                            <div class="clints-pays mt-0">
+                                <h3 class="new">
+                                    new
+                                </h3>
+
+                               
+                                 <%= form.submit class: "btn btn-primary" %>
+
+                            </div>
+                                </div>
+
+
+                           
+
+                        </div>
+                        </div>
+             
+
+<% end %>
+
+
+
+
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 

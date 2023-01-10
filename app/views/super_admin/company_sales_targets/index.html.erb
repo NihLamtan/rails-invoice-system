@@ -1,0 +1,77 @@
+
+      <div class="bg">
+
+                <div class="row justify-content-center align-items-center">
+                    <div class="col-12">
+                        <h2 class="table-heading">
+                        Company Sales Targets
+                                                    </h2>
+                        
+                    </div>
+
+                </div>
+                <div class="row align-items-center justify-content-between mb-3">
+                    
+                    <div class="col-8">
+                        <div class="input-group  search-bar">
+                            <input type="text" class="form-control" placeholder="Search"
+                                aria-label="Example text with button addon" aria-describedby="button-addon1">
+                        </div>
+
+                    </div>
+                    <div class="col-2">
+                     <%= link_to "Creat Target", new_super_admin_company_sales_target_path, class: "btn btn-primary create-btn", data:{turbo:false} %>
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-12">
+
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Company</th>
+                                <th scope="col">Admin</th>
+                                <th scope="col">Target</th>
+                                <th scope="col"></th>
+                                
+                                
+                            
+
+
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                          
+                       <%= render 'company_sales_target', company_sales_target: @company_sales_target %>
+
+
+               
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+
+
+
+
+
+
+
+<div class="row">
+<div class="col-12">
+
+<%= will_paginate @company_sales_targets, renderer: WillPaginate::ActionView::BootstrapLinkRenderer, list_classes: %w(pagination justify-content-end) %>
+
+</div>
+
+</div>
+
+
+
+
+

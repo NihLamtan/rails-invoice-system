@@ -1,0 +1,2 @@
+module MydeviseHelper
+end

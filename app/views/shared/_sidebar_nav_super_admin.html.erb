@@ -1,0 +1,116 @@
+     <div class="logo">
+                <h1>
+                    work flow
+                </h1>
+                <div id="side-nav">
+                    <!-- <a class="btn " data-bs-toggle="collapse" href="#collapseExample" role="button"
+                        aria-expanded="false" aria-controls="collapseExample">
+                        Link with href
+                    </a> -->
+
+                    <ul>
+                      
+                        <li class="sidebar-label">
+                            <div class="d-flex justify-content-between">
+                             <%= link_to super_admin_dashboard_path, data:{turbo:false} do %>
+                             <i
+                                        class="fa-solid fa-house"></i>super admin
+                                <% end %>
+                                
+                                <%# <span data-bs-toggle="collapse" href="#collapseExample" role="button"
+                                    aria-expanded="false" aria-controls="collapseExample"><i
+                                        class="fa-solid fa-chevron-down"></i></span> %>
+                            </div>
+                            
+                        </li>
+                        <li class="sidebar-label">
+                            <div class="d-flex justify-content-between">
+                             <%= link_to super_admin_clients_path, data:{turbo:false} do %>
+                            <i
+                                        class="fa-solid fa-user"></i> clients
+                                <% end %>
+                                
+                                <%# <span data-bs-toggle="collapse" href="#collapseExample1" role="button"
+                                    aria-expanded="false" aria-controls="collapseExample"><i
+                                        class="fa-solid fa-chevron-down"></i></span> %>
+                            </div>
+                   
+                        </li>
+
+                        <li class="sidebar-label">
+                            <div class="d-flex justify-content-between">
+                             <%= link_to super_admin_invoices_path, data:{turbo:false} do %>
+                            <i
+                                        class="fa-solid fa-file-invoice-dollar"></i>invoices
+                                <% end %>
+                             
+                                <%# <span data-bs-toggle="collapse" href="#collapseExample2" role="button"
+                                    aria-expanded="false" aria-controls="collapseExample"><i
+                                        class="fa-solid fa-chevron-down"></i></span> %>
+                            </div>
+                     
+                        </li>
+
+                        <li class="sidebar-label">
+                            <div class="d-flex justify-content-between">
+                               <%= link_to super_admin_companies_path, data:{turbo:false} do %>
+                           <i
+                                        class="fa-solid fa-building"></i>Companies
+                                <% end %>
+                                <%# <a class="" href="companies"> <i
+                                        class="fa-solid fa-building"></i>Companies</a> %>
+                                <%# <span data-bs-toggle="collapse" href="#collapseExample3" role="button"
+                                    aria-expanded="false" aria-controls="collapseExample"><i
+                                        class="fa-solid fa-chevron-down"></i></span> %>
+                            </div>
+                     
+                        </li>
+
+                            <li class="sidebar-label">
+                            <div class="d-flex justify-content-between">
+                            
+                              <%= link_to super_admin_users_path, data:{turbo:false} do %>
+                                <i
+                                        class="fa-solid fa-user"></i>Users
+                                <% end %>
+                               
+                                <%# <span data-bs-toggle="collapse" href="#collapseExample10" role="button"
+                                    aria-expanded="false" aria-controls="collapseExample"><i
+                                        class="fa-solid fa-chevron-down"></i></span> %>
+                            </div>
+                            
+                        </li>
+
+                        <li class="sidebar-label">
+                            <div class="d-flex justify-content-between">
+                           <%= link_to super_admin_company_sales_targets_path, data:{turbo:false} do %>
+                        <i
+                                        class="fa-solid fa-user"></i>Company Sales Target
+                                <% end %>
+                                     
+                                <%# <span data-bs-toggle="collapse" href="#collapseExample4" role="button"
+                                    aria-expanded="false" aria-controls="collapseExample"><i
+                                        class="fa-solid fa-chevron-down"></i></span> %>
+                            </div>
+                            
+                        </li>
+
+                    
+
+                        
+                        <li class="sidebar-label">
+                            <div class="d-flex justify-content-between">
+                             <%= button_to  destroy_user_session_path, method: :delete, data:{turbo:false}, class: "logout-btn" do %>
+                                       <i class="fa-solid fa-arrow-right-from-bracket"></i> Logout
+                             <% end %>
+
+                    
+                              
+                            </div>
+                           
+                        </li>
+                     
+
+                    </ul>
+                </div>
+            </div>

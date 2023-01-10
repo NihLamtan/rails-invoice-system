@@ -1,0 +1,121 @@
+
+
+
+   <div class="checkout-content">
+        <div class="checkout-item">
+         
+           <header class="clearfix mt-5">
+                <div id="logo">
+                   <% if @invoice.company.logo.attached? %>
+                  <%= image_tag @invoice.company.logo %>
+                <% end  %>
+                </div>
+                <div id="company">
+                    <h2 class="name">Company Name</h2>
+                    <div><%= @invoice.company.name %></div>
+                    
+                    <div><a href="mailto:<%= @invoice.company.email %>"><%= @invoice.company.email %></a></div>
+                </div>
+                </header>
+                <main>
+                <div id="details" class="clearfix">
+                    <div id="client">
+                    <div class="to">INVOICE TO:</div>
+                    <h2 class="name"><%= @invoice.client.name %></h2>
+                    <div class="address"><%= @invoice.client.email %></div>
+                    <%# <div class="email"><a href="mailto:john@example.com">john@example.com</a></div> %>
+                    </div>
+                    <div id="invoice">
+                    <h1>INVOICE 3-2-1</h1>
+                    <div class="date">Date of Invoice: 01/06/2014</div>
+                    <div class="date">Due Date: 30/06/2014</div>
+                    </div>
+                </div>
+                <table border="0" cellspacing="0" cellpadding="0">
+                    <thead>
+                    <tr>
+                        <th class="no">#</th>
+                        <th class="desc">DESCRIPTION</th>
+                        <th class="unit">UNIT PRICE</th>
+                        <th class="qty">QUANTITY</th>
+                        <th class="total">TOTAL</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                      <% @invoice.items.each_pair do |key, item| %>
+                    <tr>
+                        <td class="no">01</td>
+                        <td class="desc"><h3><%= item['description'] %></td>
+                        <td class="unit"><%= convert_to_money_object_and_humanized(item['price'], @invoice.currency) %></td>
+                        <td class="qty"><%= item['quantity'] %></td>
+                        <td class="total"><%= humanized_money_with_symbol(@invoice.total ) %></td>
+                    </tr>
+                  <% end %>
+                </tbody>
+                 <tfoot>
+                <tr>
+                  <td colspan="2"></td>
+                  <td colspan="2">SUBTOTAL</td>
+                  <td><%= humanized_money_with_symbol(@invoice.price ) %></td>
+                </tr>
+                <tr>
+                  <td colspan="2"></td>
+                  <td colspan="2">TAX 25%</td>
+                  <td><%= @invoice.tax %></span></td>
+                </tr>
+                <tr>
+                  <td colspan="2"></td>
+                  <td colspan="2">GRAND TOTAL</td>
+                  <td><%= humanized_money_with_symbol(@invoice.total ) %></td>
+                </tr>
+        </tfoot>
+                </table>
+                <div id="thanks">Thank you!</div>
+                <div id="notices">
+                    <div>NOTICE:</div>
+                    <div class="notice">A finance charge of 1.5% will be made on unpaid balances after 30 days.</div>
+                </div>
+                </main>
+        </div>
+
+
+                <div class="checkout-details">
+                  
+                  <div class="checkout-btn">
+                      <div  id="paypal-button-container" ></div>
+                        </div>
+                        <div class="checkout-main-heading">
+                            Contact information
+                        </div>
+
+                        
+                                <div class="mb-3">
+                                  <label for="exampleInputEmail1" class="form-label">Name</label>
+                                 
+                                  <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value="<%= @invoice.client.name %>" disabled="disabled">
+                                </div>
+                                <div class="mb-3">
+                                  <label for="exampleInputPassword1" class="form-label">Email</label>
+                                  <input type="email" class="form-control" id="exampleInputPassword1" value="<%= @invoice.client.email %>" disabled="disabled">
+                                </div>
+                                <h1 class="payment-details">
+                                    Payment details
+                                </h1>
+                                <div class="mb-3">
+                                     <%= render 'stripe/checkout_form', payment_intent: @payment_intent, invoice: @invoice %>
+                                </div>                               
+                                <div class="row">
+                                <div class="mb-3 form-check">
+                                  <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                  <label class="form-check-label" for="exampleCheck1">I have read the terms and conditions and agree to the sale of
+                                    
+                                  </label>
+                                </div>
+                                <%# <button type="submit" class="btn btn-primary checkout-form-btn">Pay</button> %>
+                        
+                    </div>
+            </div>
+            </div>
+          
+
+

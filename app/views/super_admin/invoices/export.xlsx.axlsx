@@ -1,0 +1,6 @@
+wb = xlsx_package.workbook
+wb.add_worksheet(name: "Invoices") do |sheet|
+  @invoices.each do |invoice|
+    sheet.add_row [invoice.price_cents]
+  end
+end

@@ -1,0 +1,103 @@
+
+      <div class="bg">
+
+            
+
+
+
+     
+                <div class="row justify-content-center align-items-center">
+                    <div class="col-12">
+                        <h2 class="table-heading">
+                            Clients
+                        </h2>
+                    </div>
+
+        <div class="row align-items-center justify-content-between mb-3">
+                    <div class="col-8">
+                        <div class="input-group  search-bar">
+                            <input type="text" class="form-control" placeholder="Search"
+                                aria-label="Example text with button addon" aria-describedby="button-addon1">
+                        </div>
+
+                    </div>
+                    <div class="col-2 ">
+                     <%= link_to "Create Client", new_client_path, class: "btn btn-primary create-btn", data:{turbo:false}  %>
+                    </div>
+                </div>
+
+    
+
+
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-12">
+
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Name</th>
+                                <th scope="col">Email</th>
+                                <th scope="col">Phone</th>
+                                <th scope="col">Currency</th>
+                                <th scope="col"></th>
+                            
+
+
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                          
+                                <%= render "client" %>
+
+               
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+
+
+
+                         <div class="modal fade" id="exampleModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header d-block">
+                <h5 class="modal-title hd-sm blue" id="exampleModalLabel"> Invoice # <span id="invoice-id"></span> <span class="gray hd-xsm">for <span id="client-name"></span></span> </h5> 
+                <hr>
+                <h5 class="error hd-xxsm mb-3">You haven't turned on credit card payments for this account.</h5>
+                <div class="modal-option d-flex align-items-center">
+                <div class="checkbox">
+                <input type="radio" name="payment_method" value="cash" id="pay-cash">
+                </div> 
+                <label for="pay-cash" dusk="pay-cash-option" class="px-2"><strong>Mark as Paid</strong><br> <small>Mark this invoice as paid with cash or check.</small></label>
+                </div>
+                <hr>
+                <div class="d-flex align-items-center justify-content-between">
+                   <h5>The amount due is <span id="invoice-amount" class="blue"></span></h5>
+                   <div class="d-flex align-items-center justify-content-end">
+                     <button class="btn btn-light rounded">Close</button>
+                     <%= button_to "paid", pay_invoice_path(11), method: :post %>
+                   </div>
+                </div>
+                <input type="hidden" id="invoice-id-input">
+                <input type="hidden" id="invoice-amount-input">
+              
+            </div>
+
+
+        </div>
+    </div>
+</div>
+<div class="row">
+<div class="col-12">
+
+<%= will_paginate @clients, renderer: WillPaginate::ActionView::BootstrapLinkRenderer, list_classes: %w(pagination justify-content-end) %>
+
+</div>
+
+</div>
+    
+
+

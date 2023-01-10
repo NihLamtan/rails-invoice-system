@@ -1,0 +1,2 @@
+class Invoicesexcel < ApplicationRecord
+end

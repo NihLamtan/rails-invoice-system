@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  marchant_id: MyString
+  marchant_id_in_pp: MyString
+  account_status: MyString
+  company: one
+
+two:
+  marchant_id: MyString
+  marchant_id_in_pp: MyString
+  account_status: MyString
+  company: two

@@ -1,0 +1,73 @@
+<div class="page-header">
+    <h2 class="header-title">Invoices List</h2>
+    
+</div>
+<div class="card">
+    <div class="card-body">
+        <div class="row m-b-30">
+            <div class="col-lg-8">
+                <div class="d-md-flex">
+                    <div class="m-b-10">
+                        <select class="custom-select" style="min-width: 180px;">
+                            <option selected>Status</option>
+                            <option value="all">All</option>
+                            <option value="approved">Approved</option>
+                            <option value="pending">Pending</option>
+                            <option value="rejected">Rejected</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 text-right">
+                <%= link_to "Create Invoice", new_invoice_path,  class: "btn btn-primary" %>
+               
+            </div>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-hover e-commerce-table">
+                <thead>
+                    <tr>
+                      
+                       
+                        <th>Brand</th>
+                        <th>Clients</th>
+                        <th>Email</th>
+
+                        <th>status</th>
+                    </tr>
+                </thead>
+                <tbody>
+<% @refunded_payment.each do |r| %>
+
+                    <tr>
+                       
+                       
+                        <td>
+                            <div class="d-flex align-items-center">
+                                
+                                <h6 class="m-b-0"><%= r.company.name %></h6>
+                            </div>
+                        </td>
+                        <td><%= r.client.name %></td>
+                        <td><%= r.client.email %></td>
+
+                        <td>
+                              <% r.client.payments.each do |p| %>
+
+                            <div class="d-flex align-items-center">
+                                <div class="badge badge-success <%= p.status %> badge-dot m-r-10"></div>
+                                <div><%= p.status %></div>
+                            </div>
+<% end %>
+
+                        </td>
+
+                      
+                    </tr>
+    <% end %>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

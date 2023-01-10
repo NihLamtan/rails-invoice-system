@@ -1,0 +1,10 @@
+<div>
+  <h1>Paypal Response</h1>
+  <%= @data %>
+</div>
+
+<a href="<%= @data.url %>">Connect to stripe</a>
+
+
+<a target="_blank" href="<%= @paypal_sign_up_url %>&displayMode=minibrowser" data-paypal-button="true">Sign up for PayPal</a>
+<script id="paypal-js" src="https://www.sandbox.paypal.com/webapps/merchantboarding/js/lib/lightbox/partner.js"></script>

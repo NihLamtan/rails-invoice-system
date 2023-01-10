@@ -1,0 +1,220 @@
+
+
+      <div class="bg">
+      
+                                
+
+                <div class="row justify-content-center align-items-center">
+                    <div class="col-12">
+                        <h2 class="table-heading">
+                            Invoices
+                        </h2>
+                        <p>
+                            a list of all invoices in your clients.
+                        </p>
+                    </div>
+
+                </div>
+                <div class="row align-items-center  mb-3">
+                    <div class="col-5">
+                          <ul class="client-btn d-flex mb-0">
+                            <li>
+                            </li>
+                         <li>
+                            <%= link_to "All", invoices_path(status: 'all') %>
+                            </li>
+                             <li>
+                            <%= link_to "Sent", invoices_path(status: 'sent') %>
+                            </li>
+                             <li>
+                            <%= link_to "Paid", invoices_path(status: 'paid') %>
+                            </li>
+                             <li>
+                            <%= link_to "Refunded", invoices_path(status: 'refunded') %>
+                            </li>
+                             <li>
+                            <%= link_to "Deleted", invoices_path(status: 'deleted') %>
+                            </li>
+                            
+                        </ul>
+                    </div>
+                    <div class="col-5">
+                        <div class="input-group  search-bar">
+                            <input type="text" class="form-control" placeholder="Search"
+                                aria-label="Example text with button addon" aria-describedby="button-addon1">
+                        </div>
+
+                    </div>
+                    <div class="col-2">
+                       <%= link_to "Create Invoice", new_invoice_path, class: "btn btn-primary create-btn", data:{turbo:false} %>
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="row ">
+                <div class="col-12">
+    <% if params[:q] %>
+       <% @items.each do |item|  %>
+                                    <h1><%= item.client.name %></h1>
+                                 <% end %>
+        <% else %>
+                       <table class="table">
+                        <thead>
+                            <tr>    
+                                <th scope="col">Id</th>
+                                <th scope="col">Brand</th>
+                                <th scope="col">Client</th>
+                                <th scope="col">Description</th>
+                                <th scope="col">Price</th>
+                                <th scope="col">Status</th>
+                                <th scope="col">Pay Link</th>
+                                <th scope="col">
+                                    
+                                </th>
+
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                                <% @invoices.each do |i| %>
+                            <tr>
+                                <th scope="row">#001</th>
+                                <td>
+                           <%= i.company.name %>
+                               
+                                </td>
+                                <td><%= i.client.name %></td>
+                                <td><%= i.description %></td>
+                                <td><%= humanized_money_with_symbol(i.price ) %></td>
+                                
+                                <td class="status payment-status-<%= i.status %>"><span><%= i.status %></span></td>
+                              <% if i.payment_link %>
+                                <td >
+                                <input id="copyText" value="https://secure-terminal.com/invoice/<%= i.payment_link %>"  data-bs-toggle="tooltip" data-bs-placement="top" title="Click Copy To Text">
+
+                                </td>
+                                <% else %>
+                                <td></td>
+                                <% end %>
+                                                            
+                                 <td>
+                                <ul class="d-flex action-btn">
+
+                                        <% if i.paid? %>
+                                        <li><button href="" class="pay-btn2" data-bs-toggle="modal" data-bs-target="#exampleModal" data-invoice-id="<%= i.id %>" data-invoice-amount="<%= humanized_money_with_symbol(i.price) %>", data-client-name="<%= i.client.name %>">
+                                            Pay
+                                        </button></li>
+                                        <% end %>
+                                    
+                                        <li>  <%= button_to "Send", send_invoice_invoice_path(i), method: :post %></li>
+                                            <li>
+                                        <%= link_to "Edit", edit_invoice_path(i) %>
+</li>
+                                        <li><%=  link_to "Client", i.client %></li>
+
+                                        <li>
+                                        <%= link_to "View", i %>
+                                        </li>
+
+                                        <li><%=  button_to "delete", trash_invoice_path(i), method: :patch %></li>
+
+
+                                    </ul>
+                                </td>
+
+                            </tr>
+                        <% end %>
+
+                          
+
+               
+                        </tbody>
+                    </table>
+    <% end %>
+     
+                </div>
+            </div>
+
+
+
+
+  <div class="modal fade" id="exampleModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header d-block">
+                <h5 class="modal-title hd-sm blue" id="exampleModalLabel"> Invoice # <span id="invoice-id"></span> <span class="gray hd-xsm">for <span id="client-name"></span></span> </h5> 
+                <hr>
+                <h5 class="error hd-xxsm mb-3">You haven't turned on credit card payments for this account.</h5>
+                <div class="modal-option d-flex align-items-center">
+                <div class="checkbox">
+                <input type="radio" name="payment_method" value="cash" id="pay-cash">
+                </div> 
+                <label for="pay-cash" dusk="pay-cash-option" class="px-2"><strong>Mark as Paid</strong><br> <small>Mark this invoice as paid with cash or check.</small></label>
+                </div>
+                <hr>
+                <div class="d-flex align-items-center justify-content-between">
+                   <h5>The amount due is <span id="invoice-amount" class="blue"></span></h5>
+                   <div class="d-flex align-items-center justify-content-end">
+                     <button class="btn btn-light rounded">Close</button>
+                     <%= button_to "paid", nil, method: :post, form: { id: "form-btn2"} %>
+
+                   </div>
+                </div>
+                <input type="hidden" id="invoice-id-input">
+                <input type="hidden" id="invoice-amount-input">
+              
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+<div class="row">
+<div class="col-12">
+
+<%= will_paginate @invoices, renderer: WillPaginate::ActionView::BootstrapLinkRenderer, list_classes: %w(pagination justify-content-end) %>
+
+</div>
+
+</div>
+
+<%# <%= render 'invoices' %>
+
+
+
+
+
+      <%# modal  %>
+                                    
+<div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <%= form_with(model: @report, local: true, id: 'report') do |f| %>
+            <%= f.label :start_date, class: "font-weight-semibold" %>
+            <%= f.date_field :start_date, class: "form-control" %>
+            <%= f.label :end_date, class: "font-weight-semibold" %>
+            <%= f.date_field :end_date, class: "form-control" %>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <%= f.submit class: "btn btn-primary" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+<%# modal  %>
+<script>
+const exportFrom = document.querySelector('#report')
+const exportBtn = document.querySelector('#export-btn')
+    exportFrom.addEventListener('submit', e => {
+      exportBtn.click()
+    })
+</script>

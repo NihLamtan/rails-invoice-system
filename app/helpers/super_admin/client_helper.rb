@@ -1,0 +1,2 @@
+module SuperAdmin::ClientHelper
+end

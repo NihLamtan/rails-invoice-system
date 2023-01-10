@@ -1,0 +1,149 @@
+
+  
+
+       <div class="row align-items-center">
+       <div class="col-8">
+                <div class="super-admin d-flex justify-content-between">
+                    <h1 class="super-admin-heading">
+                    Welcome to dashboard <span class="company_name"><%= load_company.name %></span>
+                    </h1>
+
+       </div>
+
+                </div>
+                <div class="col-4">
+                        <%= form_with(url: company_change_url, method: :patch) do |form| %>
+                   <%= form.label :Company, { class: "col-sm-2 col-form-label" } %>
+
+                    <%= form.collection_select(:company_id, current_user.companies.order(:name), :id, :name , {},   {class: 'form-select form-control'})  %>
+
+                                 <%= form.submit class: "btn btn-primary btn-company-change" %>
+                    <% end %>
+
+                </div>
+            </div>
+            <div class="row mt-5 ">
+                <div class="col-3">
+
+                    <div class="super-admin-pricing">
+                        <h3 class="pricing-sub-heading">
+                           Total Invoice
+                        </h3>
+                        <div class="pricing"><%= humanized_money_with_symbol(@total_amount_invoice)  %></div>
+                    </div>
+                </div>
+                <div class="col-3">
+
+                    <div class="super-admin-pricing">
+                        <h3 class="pricing-sub-heading">
+                            Paid Invoice
+                        </h3>
+                        <div class="pricing"><%= humanized_money_with_symbol(@total_paid_invoice_company) %></div>
+                    </div>
+                </div>
+                <div class="col-3">
+
+                    <div class="super-admin-pricing">
+                        <h3 class="pricing-sub-heading">
+                            Refund Invoice
+                        </h3>
+                        <div class="pricing"><%= humanized_money_with_symbol(@total_refund_invoice_company) %></div>
+                    </div>
+                </div>
+                <div class="col-3">
+
+                    <div class="super-admin-pricing">
+                        <h3 class="pricing-sub-heading">
+                            Unpaid
+                        </h3>
+                        
+                        <div class="pricing"><%= humanized_money_with_symbol(@total_unpaid_invoice_company) %></div>
+                    </div>
+                </div>
+
+
+
+            </div>
+
+            <div class="row mt-5">
+                <div class="col-12">
+                    <div class="total-amount-box">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h3 class="amount-box-heading">
+                                Revenue
+                                <p class="revenue-para">
+                                    Revenue is the income that a business has from its normal business activities,
+                                    usually
+                                    from the sale of goods and services to customers.
+                                </p>
+                            </h3>
+                            <ul class="d-flex super-admins-btn">
+                                <li><a href="" class="super-admin-tabs">today</a></li>
+                                <li><a href="" class="super-admin-tabs">week</a></li>
+                                <li><a href="" class="super-admin-tabs">month</a></li>
+                                <li><a href="" class="super-admin-tabs">year</a></li>
+                            </ul>
+                        </div>
+                         <%= line_chart @total_invoices, prefix: "$", thousands: "," %>
+
+                    </div>
+                </div>
+            </div>
+
+            <%# <div class="row mt-5">
+                <div class="col-4">
+                    <div class="total-amount-box">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h3 class="amount-box-heading">
+                                Refund
+                                <p class="revenue-para">
+                                    Revenue is the income that a business has from its normal business activities,
+                                    usually
+                                    from the sale of goods and services to customers.
+                                </p>
+                            </h3>
+
+                        </div>
+
+                    </div>
+                </div> %>
+
+                <%# <div class="col-4">
+                    <div class="total-amount-box">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h3 class="amount-box-heading">
+                                Unpaid
+                                <p class="revenue-para">
+                                    Revenue is the income that a business has from its normal business activities,
+                                    usually
+                                    from the sale of goods and services to customers.
+                                </p>
+                            </h3>
+
+                        </div>
+
+                    </div>
+                </div> %>
+
+                <%# <div class="col-4">
+                    <div class="total-amount-box">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h3 class="amount-box-heading">
+                                Paid
+                                <p class="revenue-para">
+                                    Revenue is the income that a business has from its normal business activities,
+                                    usually
+                                    from the sale of goods and services to customers.
+                                </p>
+                            </h3>
+
+                        </div> %>
+                          <%# <%= line_chart @paid_invoices, prefix: "$", thousands: ","  %> 
+                    <%# </div>
+                </div>
+            </div> %>
+
+       
+
+
+        

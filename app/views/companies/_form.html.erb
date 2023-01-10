@@ -1,0 +1,68 @@
+
+        
+
+                        <%= form_with(model: company) do |form| %>
+
+            <div class="row">
+                <div class="col-7">
+   
+                                  
+                                    <div class="form-field-client">
+                                    <div class="row ">
+                                     <%= form.label :name, class: "col-sm-2 col-form-label font-weight-semibold" %>
+                               
+                                        <div class="col-sm-9">
+                                          <%= form.text_field :name, class: "form-control", placeholder: "Name"  %>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="row">
+                                       <%= form.label :email, class: "col-sm-2 col-form-label  font-weight-semibold" %>
+                                        <div class="col-sm-9">
+                                            <%= form.email_field :email, class: "form-control", placeholder: "Emai"  %>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                       <%= form.label :logo, class: "col-sm-2 col-form-label  font-weight-semibold" %>
+
+                                      
+                                        <div class="col-sm-9">
+                                            <%= form.file_field :logo, class: "form-control", placeholder: "Phone"  %>
+
+                                      
+                                        </div>
+
+                                    </div>
+                                    
+                                  
+                                </div>
+                                </div>
+                              
+                                 <div class="col-3">
+                            <div class="clints-pays mt-0">
+                                <h3 class="new">
+                                    new
+                                </h3>
+
+                               
+                                 <%= form.submit class: "btn btn-primary" %>
+
+                            </div>
+                                </div>
+
+
+                           
+
+                        </div>
+                        </div>
+             
+
+<% end %>
+
+
+
+
+
+ 
